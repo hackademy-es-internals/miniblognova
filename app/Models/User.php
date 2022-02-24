@@ -57,4 +57,9 @@ class User extends Authenticatable
     {
         return $this->role == 'revisor';
     }
+
+    public function toRevisor()
+    {
+        $this->role = 'revisor';
+    }
 }

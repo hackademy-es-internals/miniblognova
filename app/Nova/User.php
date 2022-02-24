@@ -4,6 +4,7 @@ namespace App\Nova;
 
 use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
+use Laravel\Nova\Actions\Action;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Gravatar;
@@ -120,6 +121,15 @@ class User extends Resource
      */
     public function actions(Request $request)
     {
-        return [];
+        return [
+            new Actions\makeUserRevisor,
+            (new Actions\changeRole)
+                ->canSee(function ($request) {
+                return $request->user()->isAdmin() || $request->user()->isRevisor();
+                })
+                ->canRun(function ($request, $user) {
+                return $request->user()->isAdmin();
+            }),
+        ];
     }
 }
