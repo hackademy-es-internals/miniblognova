@@ -12,7 +12,9 @@
 </head>
 <body >
     <x-navbar />
-
+    @auth
+    <x-showUserDetails title="User details:" />
+    @endauth
     {{ $slot }}
 
     <x-footer />
