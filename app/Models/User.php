@@ -50,6 +50,11 @@ class User extends Authenticatable
 
     public function isAdmin()
     {
-        return true;
+        return $this->role == 'admin';
+    }
+
+    public function isRevisor()
+    {
+        return $this->role == 'revisor';
     }
 }

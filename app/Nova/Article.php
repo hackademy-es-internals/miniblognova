@@ -4,26 +4,29 @@ namespace App\Nova;
 
 use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
-use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Fields\Select;
-use Laravel\Nova\Fields\Gravatar;
-use Laravel\Nova\Fields\Password;
 
-class User extends Resource
+use Laravel\Nova\Fields\Code;
+use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Boolean;
+use Laravel\Nova\Fields\DateTime;
+use Laravel\Nova\Fields\Textarea;
+use Laravel\Nova\Http\Requests\NovaRequest;
+
+class Article extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = \App\Models\User::class;
+    public static $model = \App\Models\Article::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
      *
      * @var string
      */
-    public static $title = 'name';
+    public static $title = 'title';
 
     /**
      * The columns that should be searched.
@@ -31,7 +34,7 @@ class User extends Resource
      * @var array
      */
     public static $search = [
-        'id', 'name','email'
+        'id','title','description'
     ];
 
     /**
@@ -43,35 +46,17 @@ class User extends Resource
     public function fields(Request $request)
     {
         return [
-            ID::make()->sortable(),
-
-            Gravatar::make()->maxWidth(50),
-
-            Text::make(__('Nombre'),'name')
-                ->sortable()
-                ->rules('required', 'max:255'),
-
-            Text::make(__('Correo'),'email')
-                ->sortable()
-                ->rules('required', 'email', 'max:254')
-                ->creationRules('unique:users,email')
-                ->updateRules('unique:users,email,{{resourceId}}'),
-
-            Password::make(__('Password'),'password')
-                ->onlyOnForms()
-                ->creationRules('required', 'string', 'min:8')
-                ->updateRules('nullable', 'string', 'min:8'),
-                
-            Select::make(__('Rol'),'role')->options([
-                'user' => 'Usuario',
-                'admin' => 'Administrador',
-                'revisor' => 'Revisor',
-            ])
-            ->displayUsingLabels()
-            ->sortable()
-            ->canSee(function ($request){
-                return $request->user()->isAdmin();
-            }),
+            ID::make(__('ID'), 'id')->sortable(),
+            Text::make(__('Titulo'),'title')->sortable(),
+            Code::make(__('Descripción'),'description'),
+            Boolean::make(__('Publicado'),'published')
+                    ->hideWhenCreating()
+                    ->readonly(function($request){
+                        return ! $request->user()->isRevisor();
+                    }),
+                    
+            DateTime::make('Updated At')->hideFromIndex(),
+            DateTime::make('Created At'),
         ];
     }
 
