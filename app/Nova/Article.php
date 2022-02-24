@@ -6,6 +6,7 @@ use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
 
 use Laravel\Nova\Fields\Code;
+use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\DateTime;
@@ -49,7 +50,7 @@ class Article extends Resource
         return [
             ID::make(__('ID'), 'id')->sortable(),
             Text::make(__('Titulo'),'title')->sortable(),
-            Code::make(__('Descripción'),'description'),
+            Textarea::make(__('Descripción'),'description'),
             Boolean::make(__('Publicado'),'published')
                     ->hideWhenCreating()
                     ->readonly(function($request){
@@ -62,8 +63,14 @@ class Article extends Resource
                             return ! $request->user()->isAdmin();
                         }
                     ),
-            DateTime::make('Updated At')->hideFromIndex(),
-            DateTime::make('Created At'),
+            DateTime::make(__('Modificado el'),'updated_at')
+                    ->format('DD/MM/YYYY HH:mm:ss') // js style
+                    ->pickerDisplayFormat('d/m/Y H:i:S') // carbon style
+                    ->onlyOnDetail(),
+            Date::make(__('Creado el'),'created_at')
+                    ->format('DD/MM/YYYY') // js style
+                    ->pickerDisplayFormat('d/m/Y') // carbon style
+                    ->onlyOnDetail()
         ];
     }
 
