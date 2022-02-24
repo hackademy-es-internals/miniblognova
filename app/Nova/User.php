@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Gravatar;
+use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\Password;
 
 class User extends Resource
@@ -72,6 +73,7 @@ class User extends Resource
             ->canSee(function ($request){
                 return $request->user()->isAdmin();
             }),
+            HasMany::make(__('Articulos'),'articles','App\Nova\Article')
         ];
     }
 

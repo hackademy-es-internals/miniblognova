@@ -10,6 +10,7 @@ use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\Textarea;
+use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Article extends Resource
@@ -54,7 +55,13 @@ class Article extends Resource
                     ->readonly(function($request){
                         return ! $request->user()->isRevisor();
                     }),
-                    
+            BelongsTo::make(__('Author'), 'user', 'App\Nova\User')
+                    ->default($request->user()->getKey())
+                    ->readonly(
+                        function($request){
+                            return ! $request->user()->isAdmin();
+                        }
+                    ),
             DateTime::make('Updated At')->hideFromIndex(),
             DateTime::make('Created At'),
         ];
