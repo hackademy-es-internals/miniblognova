@@ -14,6 +14,7 @@ use Laravel\Nova\Fields\KeyValue;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use Waynestate\Nova\CKEditor;
 
 class Article extends Resource
 {
@@ -51,7 +52,19 @@ class Article extends Resource
         return [
             ID::make(__('ID'), 'id')->sortable(),
             Text::make(__('Titulo'),'title')->sortable(),
-            Textarea::make(__('Descripción'),'description'),
+            CKEditor::make(__('Descripción'),'description')->options([
+                'height' => 300,
+                'toolbar' => [
+                    ['Source','-','Cut','Copy','Paste'],
+                    ['Format', 'FontSize'],
+            ['Undo', 'Redo', '-', 'Find', 'Replace', '-', 'SelectAll', 'RemoveFormat'],
+
+                    ['Bold', 'Italic', 'Strike', '-', 'Subscript', 'Superscript'],
+            ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', 'Blockquote', 'CreateDiv'],
+            ['JustifyLeft', 'JustifyCenter', 'JustifyRight'],
+            ['Link', 'Unlink', 'Anchor'],
+                ],
+            ]),
             Boolean::make(__('Publicado'),'published')
                     ->hideWhenCreating()
                     ->readonly(function($request){

@@ -10,7 +10,7 @@
     <div class="row">
         <div class="col-12">
             <h1>{{$article->title}}</h1>
-            
+            {!!$article->description!!}
         </div>
     </div>
 </div>
