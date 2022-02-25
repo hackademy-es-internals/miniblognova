@@ -58,8 +58,24 @@ class User extends Authenticatable
         return $this->role == 'revisor';
     }
 
+    public function isUser()
+    {
+        return $this->role == "user";
+    }
+
     public function toRevisor()
     {
         $this->role = 'revisor';
+    }
+
+    public function canImpersonate($impersonated = null)
+    {
+        return $this->isAdmin();
+    }
+
+    public function canBeImpersonated(?\Illuminate\Contracts\Auth\Authenticatable $impersonator = null)
+    {
+        
+        return $this->isUser();
     }
 }

@@ -4,12 +4,13 @@ namespace App\Nova;
 
 use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
-use Laravel\Nova\Actions\Action;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Select;
-use Laravel\Nova\Fields\Gravatar;
+use Laravel\Nova\Actions\Action;
 use Laravel\Nova\Fields\HasMany;
+use Laravel\Nova\Fields\Gravatar;
 use Laravel\Nova\Fields\Password;
+use KABBOUCHI\NovaImpersonate\Impersonate;
 
 class User extends Resource
 {
@@ -58,7 +59,6 @@ class User extends Resource
                 ->rules('required', 'email', 'max:254')
                 ->creationRules('unique:users,email')
                 ->updateRules('unique:users,email,{{resourceId}}'),
-
             Password::make(__('Password'),'password')
                 ->onlyOnForms()
                 ->creationRules('required', 'string', 'min:8')
@@ -74,6 +74,7 @@ class User extends Resource
             ->canSee(function ($request){
                 return $request->user()->isAdmin();
             }),
+            Impersonate::make($this),
             HasMany::make(__('Articulos'),'articles','App\Nova\Article')
         ];
     }
