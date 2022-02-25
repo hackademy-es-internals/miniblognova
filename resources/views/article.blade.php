@@ -11,6 +11,9 @@
         <div class="col-12">
             <h1>{{$article->title}}</h1>
             {!!$article->description!!}
+            @foreach ($article->getMedia() as $media)
+            {{$media}}
+            @endforeach
         </div>
     </div>
 </div>
