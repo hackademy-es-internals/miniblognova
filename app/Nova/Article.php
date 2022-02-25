@@ -10,6 +10,7 @@ use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\DateTime;
+use Laravel\Nova\Fields\KeyValue;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -63,6 +64,7 @@ class Article extends Resource
                             return ! $request->user()->isAdmin();
                         }
                     ),
+            KeyValue::make(__('Meta'),'meta')->rules('json'),
             DateTime::make(__('Modificado el'),'updated_at')
                     ->format('DD/MM/YYYY HH:mm:ss') // js style
                     ->pickerDisplayFormat('d/m/Y H:i:S') // carbon style
