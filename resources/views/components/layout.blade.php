@@ -11,6 +11,12 @@
     <title>{{ isset($title) ? $title : 'hack accelletate' }}</title>
     
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+    <style>
+        div.my-img > img {
+            height: auto;
+            max-width: 100%;
+        }
+    </style>
 </head>
 <body >
     <x-navbar />

@@ -8,13 +8,14 @@ use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Code;
 use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\Text;
+use Waynestate\Nova\CKEditor;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\KeyValue;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Http\Requests\NovaRequest;
-use Waynestate\Nova\CKEditor;
+use Ebess\AdvancedNovaMediaLibrary\Fields\Images;
 
 class Article extends Resource
 {
@@ -51,20 +52,35 @@ class Article extends Resource
     {
         return [
             ID::make(__('ID'), 'id')->sortable(),
+            Images::make('Main image', 'main-image') // second parameter is the media collection name
+            ->conversionOnIndexView('thumb') // conversion used to display the image
+            ->withResponsiveImages()
+            ->rules('required'), // validation rules
             Text::make(__('Titulo'),'title')->sortable(),
             CKEditor::make(__('Descripción'),'description')->options([
                 'height' => 300,
                 'toolbar' => [
                     ['Source','-','Cut','Copy','Paste'],
                     ['Format', 'FontSize'],
-            ['Undo', 'Redo', '-', 'Find', 'Replace', '-', 'SelectAll', 'RemoveFormat'],
+                    ['Undo', 'Redo', '-', 'Find', 'Replace', '-', 'SelectAll', 'RemoveFormat'],
 
                     ['Bold', 'Italic', 'Strike', '-', 'Subscript', 'Superscript'],
             ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', 'Blockquote', 'CreateDiv'],
             ['JustifyLeft', 'JustifyCenter', 'JustifyRight'],
             ['Link', 'Unlink', 'Anchor'],
                 ],
-            ]),
+            ])->hideFromIndex(),
+            Images::make('Images', 'content-images') // second parameter is the media collection name
+            ->conversionOnPreview('thumb') // conversion used to display the "original" image
+            ->conversionOnDetailView('thumb') // conversion used on the model's view
+            ->conversionOnIndexView('thumb') // conversion used to display the image on the model's index page
+            ->conversionOnForm('thumb') // conversion used to display the image on the model's form
+            // ->fullSize() // full size column
+            ->rules('required')
+            // validation rules for the collection of images
+            ->singleImageRules('dimensions:min_width=100')
+            ->enableExistingMedia()
+            ->withResponsiveImages(),
             Boolean::make(__('Publicado'),'published')
                     ->hideWhenCreating()
                     ->readonly(function($request){

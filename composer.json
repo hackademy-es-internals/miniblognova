@@ -7,6 +7,7 @@
     "require": {
         "php": "^8.0.2",
         "coderello/laravel-nova-lang": "^1.8",
+        "ebess/advanced-nova-media-library": "^3.7",
         "guzzlehttp/guzzle": "^7.2",
         "kabbouchi/nova-impersonate": "^1.11",
         "laravel/fortify": "^1.11",

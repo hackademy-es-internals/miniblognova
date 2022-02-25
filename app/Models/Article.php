@@ -36,4 +36,10 @@ class Article extends Model implements HasMedia
                 ->crop('crop-center', 200, 200)
                 ->withResponsiveImages();
     }
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('main-image')->singleFile();
+        $this->addMediaCollection('content-images');
+    }
 }
