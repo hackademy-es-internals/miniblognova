@@ -37,7 +37,7 @@
                 <input type="password" class="form-control" value="{{old('password_confirmation')}}" name="password_confirmation" id="floatingPassword" placeholder="Confirm password">
                 <label for="floatingPassword">Confirm Password</label>
                 </div>
-                <button class="btn btn-primary" type="submit">Registrate</button>
+                <button class="btn btn-dark rounded-0 fw-bold px-4 py-2 text-uppercase fst-italic" type="submit">Registrate</button>
             </div>
         </form>
     </section>

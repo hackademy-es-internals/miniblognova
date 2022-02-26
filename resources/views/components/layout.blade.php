@@ -16,13 +16,13 @@
             height: auto;
             max-width: 100%;
         }
+        
+
     </style>
 </head>
 <body >
-    <x-navbar />
-    @auth
-    <x-showUserDetails title="User details:" />
-    @endauth
+     <!-- nav -->
+     <x-navbar />
     {{ $slot }}
 
     <x-footer />

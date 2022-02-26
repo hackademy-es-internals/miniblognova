@@ -27,8 +27,8 @@
                     <label for="floatingPassword">Password</label>
                 </div>
                 <div class="d-grid gap-2 d-md-flex align-items-baseline">
-                    <button class="btn btn-primary" type="submit">Login</button>
-                    <p>oppure <a href="{{route('register')}}">Registrate</a>!</p>
+                    <button class="btn btn-dark rounded-0 fw-bold px-4 py-2 text-uppercase fst-italic" type="submit">Login</button>
+                    <p>or <a href="{{route('register')}}">Register</a>!</p>
                 </div>
             </form>
         </div>
