@@ -10,8 +10,8 @@ class PublicController extends Controller
     public function index()
     {
         $title = "Home";
-        $articles = Article::all();
-        return view('welcome',compact('title','articles'));
+        $articles = Article::with('user')->wherePublished(true)->latest()->get();
+        return view('home',compact('title','articles'));
     }
 
     public function showArticle($id)

@@ -33,8 +33,9 @@ class Article extends Model implements HasMedia
               ->withResponsiveImages();
         
         $this->addMediaConversion('thumb-cropped')
-                ->crop('crop-center', 200, 200)
+                ->crop('crop-center', 1000, 500)
                 ->withResponsiveImages();
+
     }
 
     public function registerMediaCollections(): void

@@ -76,6 +76,7 @@ class User extends Authenticatable
     public function canBeImpersonated(?\Illuminate\Contracts\Auth\Authenticatable $impersonator = null)
     {
         
-        return $this->isUser();
+        return !$this->isAdmin();
+        // return $this->isUser();
     }
 }

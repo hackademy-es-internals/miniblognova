@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light border-bottom text-uppercase py-3">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top text-uppercase py-3">
   <div class="container-fluid">
     <a class="navbar-brand text-uppercase fw-bold" href="/">Delicious World</a>
     <button class="navbar-toggler border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidemenu"

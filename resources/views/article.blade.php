@@ -79,7 +79,7 @@
                 <div class="row">
                     <div class="col-12 col-lg-4 mb-3 d-flex justify-content-center">
                         <div class="card border-0 rounded-0 shadow-sm">
-                            <img src="./media/blog02.jpg" class="card-img-top" alt="...">
+                            {{-- <img src="./media/blog02.jpg" class="card-img-top" alt="..."> --}}
                             <div class="card-body">
                                 <h5 class="fw-bold">Pizza Picasso</h5>
                                 <p class="fw-light">Some quick example text to build on the card title and make up the
@@ -97,7 +97,7 @@
                     </div>
                     <div class="col-12 col-lg-4 mb-3 d-flex justify-content-center">
                         <div class="card border-0 rounded-0 shadow-sm">
-                            <img src="./media/blog03.jpg" class="card-img-top" alt="...">
+                            {{-- <img src="./media/blog03.jpg" class="card-img-top" alt="..."> --}}
                             <div class="card-body">
                                 <h5 class="fw-bold">Indian Fried Rice</h5>
                                 <p class="fw-light">Some quick example text to build on the card title and make up the
@@ -115,7 +115,7 @@
                     </div>
                     <div class="col-12 col-lg-4 mb-3 d-flex justify-content-center">
                         <div class="card border-0 rounded-0 shadow-sm">
-                            <img src="./media/blog04.jpg" class="card-img-top" alt="...">
+                            {{-- <img src="./media/blog04.jpg" class="card-img-top" alt="..."> --}}
                             <div class="card-body">
                                 <h5 class="fw-bold">Grilled Cauliflowers</h5>
                                 <p class="fw-light">Some quick example text to build on the card title and make up the

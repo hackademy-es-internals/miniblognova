@@ -18,5 +18,10 @@
                 {{ __('Logout') }}
             </a>
         </li>
+        <li>
+            <a href="{{ route('home') }}" class="block no-underline text-90 hover:bg-30 p-3">
+                Site
+            </a>
+        </li>
     </ul>
 </dropdown-menu>

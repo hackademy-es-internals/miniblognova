@@ -93,7 +93,9 @@ class Article extends Resource
                             return ! $request->user()->isAdmin();
                         }
                     ),
-            KeyValue::make(__('Meta'),'meta')->rules('json'),
+            KeyValue::make(__('Meta tags'),'meta')
+            // ->withMeta(['value'=>$this->meta ?? ['title'=>'','description'=>'']])
+            ->rules('json'),
             DateTime::make(__('Modificado el'),'updated_at')
                     ->format('DD/MM/YYYY HH:mm:ss') // js style
                     ->pickerDisplayFormat('d/m/Y H:i:S') // carbon style
